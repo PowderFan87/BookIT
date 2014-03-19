@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
  * 
  * @author Holger Szuesz <hszuesz@live.com>
  */
-public class Main extends HttpServlet
+public class Get extends HttpServlet
 {
     private void processRequest(HttpServletRequest objRequest, HttpServletResponse objResponse) throws IOException {
         objResponse.setContentType("text/html;charset=UTF-8");
