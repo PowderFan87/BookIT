@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>BookIT</title>
-        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width">
         
-        <link rel="stylesheet" href="js/libs/jqueryui/css/base/jquery.ui.all.css" />
+        <link rel="stylesheet" href="/BookIT/css/main.css" />
+        <link rel="stylesheet" href="/BookIT/js/libs/jqueryui/css/base/jquery.ui.all.css" />
         
-        <script type="text/javascript" src="js/libs/jquery/jquery.js"></script>
-        <script type="text/javascript" src="js/libs/jqueryui/jquery-ui.js"></script>
+        <title>BookIT</title>
     </head>
     <body>
         <h1>Good Morning</h1>
+        
         <br />
+        
         <form action="/BookIT/p/Login" method="POST">
+            <input type="text" name="strUsername" id="strUsername" value="Username" /><br />
+            <input type="password" name="strPassword" id="strPassword" value="" /><br />
             <input type="submit" value="Login" />
         </form>
+        
+        <script type="text/javascript" src="/BookIT/js/libs/jquery/jquery.js"></script>
+        <script type="text/javascript" src="/BookIT/js/libs/jqueryui/jquery-ui.js"></script>
+        <script type="text/javascript" src="/BookIT/js/libs/main.js"></script>
     </body>
 </html>

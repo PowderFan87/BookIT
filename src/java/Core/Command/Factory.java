@@ -12,9 +12,9 @@ import java.util.logging.Logger;
 public class Factory
 {
     public static Core.Command.Base getCommand(HttpServletRequest objRequest) {
-        String              strCommand  = objRequest.getRequestURI().substring(1).replaceAll("BookIT", "Command");
-        String              strAction;
-        Core.Command.Base   objCommand  = null;
+        String  strCommand  = objRequest.getRequestURI().substring(1).replaceAll("BookIT", "Command");
+        String  strAction;
+        Base    objCommand  = null;
 
         switch (objRequest.getMethod()) {
             case "GET":
@@ -46,7 +46,7 @@ public class Factory
         
         try {
             Class<?> objClass   = Class.forName(strCommand);
-            objCommand          = (Core.Command.Base)objClass.newInstance();
+            objCommand          = (Base)objClass.newInstance();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(Factory.class.getName()).log(Level.SEVERE, null, ex);
         }

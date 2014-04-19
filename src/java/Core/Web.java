@@ -50,6 +50,9 @@ public class Web extends HttpServlet
             out.println(objRequest.getHeader("X-Requested-With"));
             out.println(this.getServletInfo());
             out.println(Web.objSession.getAttribute("lngUserid"));
+            out.println("Object-ID: " + this.hashCode());
+            out.println("Request-ID: " + objRequest.hashCode());
+            out.println("Response-ID: " + objResponse.hashCode());
             out.println("</pre>");
             out.println("<form action=\"/BookIT/p/Logout\" method=\"POST\">");
             out.println("<input type=\"submit\" value=\"Logout\" />");

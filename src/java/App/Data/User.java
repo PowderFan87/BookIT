@@ -1,6 +1,11 @@
 package App.Data;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -12,18 +17,24 @@ public class User extends Base
     private String  strUsername;
     private String  strPassword;
     private boolean blnActive;
-    private String  dtmActivated;
+    private Date    dtmActivated;
     private boolean flgDeleted;
     private int     tblUsertype_UID;
     
     public User(Map<String, String> mapData) {
         super();
         
+        SimpleDateFormat objParser = new SimpleDateFormat("yyyy-mm-dd");
+        
         this.UID                = Integer.parseInt(mapData.get("UID"));
         this.strUsername        = mapData.get("STRUSERNAME");
         this.strPassword        = mapData.get("STRPASSWORD");
         this.blnActive          = Boolean.parseBoolean(mapData.get("BLNACTIVE"));
-        this.dtmActivated       = mapData.get("DTMACTIVATED");
+        try {
+            this.dtmActivated   = objParser.parse(mapData.get("DTMACTIVATED"));
+        } catch (ParseException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.flgDeleted         = Boolean.parseBoolean(mapData.get("FLGDELETED"));
         this.tblUsertype_UID    = Integer.parseInt(mapData.get("TBLUSERTYPE_UID"));
     }
@@ -60,11 +71,11 @@ public class User extends Base
         this.blnActive = blnActive;
     }
 
-    public String getDtmActivated() {
+    public Date getDtmActivated() {
         return dtmActivated;
     }
 
-    public void setDtmActivated(String dtmActivated) {
+    public void setDtmActivated(Date dtmActivated) {
         this.dtmActivated = dtmActivated;
     }
 
