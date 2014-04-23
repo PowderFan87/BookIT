@@ -10,7 +10,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width">
 
+<link href='http://fonts.googleapis.com/css?family=Fredericka+the+Great' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="/BookIT/css/main.css" />
 <link rel="stylesheet" href="/BookIT/js/libs/jqueryui/css/base/jquery.ui.all.css" />
+
+<script type="text/javascript" src="/BookIT/js/libs/jquery/jquery.js"></script>
 
 <title>BookIT - <%=request.getAttribute("strTitle")%></title>

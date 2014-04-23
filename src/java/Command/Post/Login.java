@@ -12,7 +12,7 @@ public class Login extends Base
 {
     @Override
     public void runDefault() {
-        User objUser = tblUser.getUserByLoginData(this.objRequest.getParameter("strUsername"), this.objRequest.getParameter("strPassword"));
+        User objUser = tblUser.getUserByLoginData((String)this.getParameter("strUsername"), (String)this.getParameter("strPassword"));
         
         if(objUser instanceof User) {
             this.objRequest.getSession().setAttribute("lngUserid", objUser.getUID());

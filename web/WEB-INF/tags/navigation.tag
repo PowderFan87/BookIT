@@ -18,8 +18,11 @@
 <% } %>
 
 <a href="/BookIT/g/MyAccount">MyAccount</a>
-<a href="#" onclick="">Logout</a>
 
-<form action="/BookIT/p/Logout" method="POST">
-    <input type="submit" value="LOGOUT" />
-</form>
+<div style="float: right;">
+    <form action="/BookIT/p/Logout" method="POST">
+        <input type="submit" value="LOGOUT" class="ui-button ui-widget ui-state-default ui-corner-all" />
+    </form>
+</div>
+
+<br clear="all" />

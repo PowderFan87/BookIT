@@ -27,7 +27,27 @@ public class Base
         return mapRow;
     }
     
+    protected static List<Map> getAll(String strTable) {
+        try {
+            return Connector.getInstance().execute("SELECT * FROM " + strTable);
+        } catch (SQLException ex) {
+            Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
+    }
+    
     protected static Map fetchSingleEntry(String strTable, List<String[]> lisFilter) {
+        List lisRows = Base.fetchAll(strTable, lisFilter);
+        
+        if(lisRows.isEmpty()) {
+            return null;
+        } else {
+            return (Map)lisRows.get(0);
+        }
+    }
+    
+    protected static List<Map> fetchAll(String strTable, List<String[]> lisFilter) {
         try {
             String  strSql  = "SELECT * FROM " + strTable + " WHERE ";
             
@@ -44,7 +64,7 @@ public class Base
             if(lisRows.isEmpty()) {
                 return null;
             } else {
-                return (Map)lisRows.get(0);
+                return lisRows;
             }
         } catch (SQLException ex) {
             Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);

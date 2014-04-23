@@ -2,6 +2,8 @@ package Core.Command;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -13,10 +15,11 @@ import javax.servlet.http.HttpServletResponse;
  */
 public abstract class Base
 {
-    private     String              strAction;
+    private     String                  strAction;
+    private     Map<String, String[]>   mapParams = new HashMap<>();
     
-    protected   HttpServletRequest  objRequest;
-    protected   HttpServletResponse objResponse;
+    protected   HttpServletRequest      objRequest;
+    protected   HttpServletResponse     objResponse;
     
     public abstract void runDefault();
     
@@ -24,6 +27,8 @@ public abstract class Base
         Method objMethod    = null;
         this.objRequest     = objRequest;
         this.objResponse    = objResponse;
+        
+        this.doSanitize();
         
         try {
             objMethod = this.getClass().getMethod("run" + this.strAction);
@@ -40,5 +45,30 @@ public abstract class Base
     
     public void setstrAction(String strAction) {
         this.strAction = strAction;
+    }
+    
+    public Object getParameter(String strName) {
+        return this.mapParams.get(strName)[0];
+    }
+    
+    private void doSanitize() {
+        this.mapParams = this.objRequest.getParameterMap();
+        
+        for(String strKey: this.mapParams.keySet()) {
+            String[] arrParam = this.mapParams.get(strKey);
+            
+            for(int i = 0; i < arrParam.length; i++) {
+                arrParam[i] = arrParam[i]
+                    .replace("\\", "\\\\")
+                    .replace("'", "\\'")
+                    .replace("\0", "\\0")
+                    .replace("\n", "\\n")
+                    .replace("\r", "\\r")
+                    .replace("\"", "\\\"")
+                    .replace("\\x1a", "\\Z");
+                
+                //todo striptags...
+            }
+        }
     }
 }

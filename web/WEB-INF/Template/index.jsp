@@ -12,11 +12,11 @@
         <myTags:header />
     </head>
     <body>
-        <nav>
+        <nav class="ui-corner-all">
             <myTags:navigation />
         </nav>
         
-        <section id="main">
+        <section id="main" class="ui-corner-all">
             <jsp:include page="<%="/WEB-INF/Template/Command/" + request.getAttribute("tplView")%>"></jsp:include>
         </section>
         

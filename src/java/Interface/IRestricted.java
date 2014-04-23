@@ -1,6 +1,7 @@
 package Interface;
 
 import Core.Command.RestrictionException;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -8,6 +9,6 @@ import Core.Command.RestrictionException;
  */
 public interface IRestricted
 {
-    public  void    checkRestriction() throws RestrictionException;
+    public  void    checkRestriction(HttpServletRequest objRequest) throws RestrictionException;
     public  void    runFallback();
 }

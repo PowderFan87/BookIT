@@ -38,4 +38,17 @@ public class tblUser extends Base
         
         return objUser;
     }
+    
+    public static List<User> getAll() {
+        List<User>  lisUser = new ArrayList<>();
+        List<Map>   lisRows = tblUser.getAll("TBLUSER");
+        
+        if(lisRows != null && !lisRows.isEmpty()) {
+            for(Map<String, String> mapData:lisRows) {
+                lisUser.add(new User(mapData));
+            }
+        }
+        
+        return lisUser;
+    }
 }

@@ -57,7 +57,7 @@ public class Factory
         
         if(objCommand instanceof IRestricted) {
             try {
-                ((IRestricted)objCommand).checkRestriction();
+                ((IRestricted)objCommand).checkRestriction(objRequest);
             } catch(RestrictionException ex) {
                 objCommand.setstrAction("Fallback");
             }
