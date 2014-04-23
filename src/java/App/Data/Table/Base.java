@@ -40,7 +40,7 @@ public class Base
     protected static Map fetchSingleEntry(String strTable, List<String[]> lisFilter) {
         List lisRows = Base.fetchAll(strTable, lisFilter);
         
-        if(lisRows.isEmpty()) {
+        if(lisRows == null || lisRows.isEmpty()) {
             return null;
         } else {
             return (Map)lisRows.get(0);

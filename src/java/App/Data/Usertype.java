@@ -24,24 +24,30 @@ public class Usertype extends Base
         return UID;
     }
 
-    public void setUID(int UID) {
+    public Usertype setUID(int UID) {
         this.UID = UID;
+        
+        return this;
     }
 
     public String getStrName() {
         return strName;
     }
 
-    public void setStrName(String strName) {
+    public Usertype setStrName(String strName) {
         this.strName = strName;
+        
+        return this;
     }
 
     public Boolean isFlgDeleted() {
         return flgDeleted;
     }
 
-    public void setFlgDeleted(Boolean flgDeleted) {
+    public Usertype setFlgDeleted(Boolean flgDeleted) {
         this.flgDeleted = flgDeleted;
+        
+        return this;
     }
     
     

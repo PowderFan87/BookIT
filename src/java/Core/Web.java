@@ -31,7 +31,9 @@ public class Web extends HttpServlet
             
             objCommand.run(objRequest, objResponse);
             
-            objRequest.getRequestDispatcher("/WEB-INF/Template/index.jsp").forward(objRequest, objResponse);
+            if(!objResponse.isCommitted()) {
+                objRequest.getRequestDispatcher("/WEB-INF/Template/index.jsp").forward(objRequest, objResponse);
+            }
             
 //            System.out.println(App.Security.encodeString("800k17_54l7meinpw"));
             

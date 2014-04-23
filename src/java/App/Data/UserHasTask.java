@@ -30,48 +30,60 @@ public class UserHasTask extends Base
         return tblUser_UID;
     }
 
-    public void setTblUser_UID(int tblUser_UID) {
+    public UserHasTask setTblUser_UID(int tblUser_UID) {
         this.tblUser_UID = tblUser_UID;
+        
+        return this;
     }
 
     public int getTblTask_UID() {
         return tblTask_UID;
     }
 
-    public void setTblTask_UID(int tblTask_UID) {
+    public UserHasTask setTblTask_UID(int tblTask_UID) {
         this.tblTask_UID = tblTask_UID;
+        
+        return this;
     }
 
     public int getLngGrantedminutes() {
         return lngGrantedminutes;
     }
 
-    public void setLngGrantedminutes(int lngGrantedminutes) {
+    public UserHasTask setLngGrantedminutes(int lngGrantedminutes) {
         this.lngGrantedminutes = lngGrantedminutes;
+        
+        return this;
     }
 
     public int getLngMinutesleft() {
         return lngMinutesleft;
     }
 
-    public void setLngMinutesleft(int lngMinutesleft) {
+    public UserHasTask setLngMinutesleft(int lngMinutesleft) {
         this.lngMinutesleft = lngMinutesleft;
+        
+        return this;
     }
 
     public int getLngBookingscount() {
         return lngBookingscount;
     }
 
-    public void setLngBookingscount(int lngBookingscount) {
+    public UserHasTask setLngBookingscount(int lngBookingscount) {
         this.lngBookingscount = lngBookingscount;
+        
+        return this;
     }
 
     public Boolean isFlgDeleted() {
         return flgDeleted;
     }
 
-    public void setFlgDeleted(Boolean flgDeleted) {
+    public UserHasTask setFlgDeleted(Boolean flgDeleted) {
         this.flgDeleted = flgDeleted;
+        
+        return this;
     }
     
     

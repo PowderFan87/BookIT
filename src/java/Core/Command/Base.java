@@ -15,11 +15,11 @@ import javax.servlet.http.HttpServletResponse;
  */
 public abstract class Base
 {
-    private     String                  strAction;
-    private     Map<String, String[]>   mapParams = new HashMap<>();
-    
     protected   HttpServletRequest      objRequest;
     protected   HttpServletResponse     objResponse;
+    
+    private     String                  strAction;
+    private     Map<String, String[]>   mapParams = new HashMap<>();
     
     public abstract void runDefault();
     
@@ -29,6 +29,8 @@ public abstract class Base
         this.objResponse    = objResponse;
         
         this.doSanitize();
+        
+        System.out.println(this.strAction);
         
         try {
             objMethod = this.getClass().getMethod("run" + this.strAction);
@@ -49,6 +51,12 @@ public abstract class Base
     
     public Object getParameter(String strName) {
         return this.mapParams.get(strName)[0];
+    }
+    
+    protected void paramToAttribute() {
+        for(String strKey: this.mapParams.keySet()) {
+            this.objRequest.setAttribute(strKey, this.getParameter(strKey));
+        }
     }
     
     private void doSanitize() {

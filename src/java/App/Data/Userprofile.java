@@ -16,6 +16,10 @@ public class Userprofile extends Base
     private Boolean flgDeleted;
     private int     tblUser_UID;
     
+    public Userprofile() {
+        super();
+    }
+    
     public Userprofile(Map<String, String> mapData) {
         super();
         
@@ -32,56 +36,70 @@ public class Userprofile extends Base
         return UID;
     }
 
-    public void setUID(int UID) {
+    public Userprofile setUID(int UID) {
         this.UID = UID;
+        
+        return this;
     }
 
     public String getStrSurname() {
         return strSurname;
     }
 
-    public void setStrSurname(String strSurname) {
+    public Userprofile setStrSurname(String strSurname) {
         this.strSurname = strSurname;
+        
+        return this;
     }
 
     public String getStrName() {
         return strName;
     }
 
-    public void setStrName(String strName) {
+    public Userprofile setStrName(String strName) {
         this.strName = strName;
+        
+        return this;
     }
 
     public String getStrEmail() {
         return strEmail;
     }
 
-    public void setStrEmail(String strEmail) {
+    public Userprofile setStrEmail(String strEmail) {
         this.strEmail = strEmail;
+        
+        return this;
     }
 
     public String getStrCustomstartpage() {
         return strCustomstartpage;
     }
 
-    public void setStrCustomstartpage(String strCustomstartpage) {
+    public Userprofile setStrCustomstartpage(String strCustomstartpage) {
         this.strCustomstartpage = strCustomstartpage;
+        
+        return this;
     }
 
     public Boolean isFlgDeleted() {
         return flgDeleted;
     }
 
-    public void setFlgDeleted(Boolean flgDeleted) {
+    public Userprofile setFlgDeleted(Boolean flgDeleted) {
         this.flgDeleted = flgDeleted;
+        
+        return this;
     }
 
     public int getTblUser_UID() {
         return tblUser_UID;
     }
 
-    public void setTblUser_UID(int tblUser_UID) {
+    public Userprofile setTblUser_UID(int tblUser_UID) {
         this.tblUser_UID = tblUser_UID;
+        
+        return this;
     }
     
     

@@ -6,6 +6,15 @@ package App.Data;
  */
 public abstract class Base
 {
+    protected Base doInsert(String strTable) {
+        
+        
+        return this;
+    }
     
-    
+    protected Base doUpdate(String strTable) {
+        
+        
+        return this;
+    }
 }

@@ -21,6 +21,10 @@ public class User extends Base
     private boolean flgDeleted;
     private int     tblUsertype_UID;
     
+    public User() {
+        super();
+    }
+    
     public User(Map<String, String> mapData) {
         super();
         
@@ -43,55 +47,69 @@ public class User extends Base
         return UID;
     }
 
-    public void setUID(int UID) {
+    public User setUID(int UID) {
         this.UID = UID;
+        
+        return this;
     }
 
     public String getStrUsername() {
         return strUsername;
     }
 
-    public void setStrUsername(String strUsername) {
+    public User setStrUsername(String strUsername) {
         this.strUsername = strUsername;
+        
+        return this;
     }
 
     public String getStrPassword() {
         return strPassword;
     }
 
-    public void setStrPassword(String strPassword) {
+    public User setStrPassword(String strPassword) {
         this.strPassword = strPassword;
+        
+        return this;
     }
 
     public boolean isBlnActive() {
         return blnActive;
     }
 
-    public void setBlnActive(boolean blnActive) {
+    public User setBlnActive(boolean blnActive) {
         this.blnActive = blnActive;
+        
+        return this;
     }
 
     public Date getDtmActivated() {
         return dtmActivated;
     }
 
-    public void setDtmActivated(Date dtmActivated) {
+    public User setDtmActivated(Date dtmActivated) {
         this.dtmActivated = dtmActivated;
+        
+        return this;
     }
 
     public boolean isFlgDeleted() {
         return flgDeleted;
     }
 
-    public void setFlgDeleted(boolean flgDeleted) {
+    public User setFlgDeleted(boolean flgDeleted) {
         this.flgDeleted = flgDeleted;
+        
+        return this;
     }
 
     public int getTblUsertype_UID() {
         return tblUsertype_UID;
     }
 
-    public void setTblUsertype_UID(int tblUsertype_UID) {
+    public User setTblUsertype_UID(int tblUsertype_UID) {
         this.tblUsertype_UID = tblUsertype_UID;
+        
+        return this;
     }
 }

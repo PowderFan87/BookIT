@@ -21,7 +21,6 @@ public class Admin extends Base implements IRestricted
     public void runDefault() {
         List<User> lisUser = tblUser.getAll();
         
-        
         this.objRequest.setAttribute("lisUser", lisUser);
         
         this.objRequest.setAttribute("tplView", "Get/Admin.jsp");
@@ -46,5 +45,10 @@ public class Admin extends Base implements IRestricted
         } catch (IOException ex) {
             Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void runNewUser() {
+        this.objRequest.setAttribute("tplView", "Get/Admin/NewUser.jsp");
+        this.objRequest.setAttribute("strTitle", "NewUser");
     }
 }

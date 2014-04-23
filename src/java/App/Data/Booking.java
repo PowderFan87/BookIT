@@ -43,56 +43,70 @@ public class Booking extends Base
         return UID;
     }
 
-    public void setUID(int UID) {
+    public Booking setUID(int UID) {
         this.UID = UID;
+        
+        return this;
     }
 
     public int getLngMinutes() {
         return lngMinutes;
     }
 
-    public void setLngMinutes(int lngMinutes) {
+    public Booking setLngMinutes(int lngMinutes) {
         this.lngMinutes = lngMinutes;
+        
+        return this;
     }
 
     public String getStrComment() {
         return strComment;
     }
 
-    public void setStrComment(String strComment) {
+    public Booking setStrComment(String strComment) {
         this.strComment = strComment;
+        
+        return this;
     }
 
     public Date getDtmDate() {
         return dtmDate;
     }
 
-    public void setDtmDate(Date dtmDate) {
+    public Booking setDtmDate(Date dtmDate) {
         this.dtmDate = dtmDate;
+        
+        return this;
     }
 
     public Boolean isFlgDeleted() {
         return flgDeleted;
     }
 
-    public void setFlgDeleted(Boolean flgDeleted) {
+    public Booking setFlgDeleted(Boolean flgDeleted) {
         this.flgDeleted = flgDeleted;
+        
+        return this;
     }
 
     public int getTblUser_UID() {
         return tblUser_UID;
     }
 
-    public void setTblUser_UID(int tblUser_UID) {
+    public Booking setTblUser_UID(int tblUser_UID) {
         this.tblUser_UID = tblUser_UID;
+        
+        return this;
     }
 
     public int getTblTask_UID() {
         return tblTask_UID;
     }
 
-    public void setTblTask_UID(int tblTask_UID) {
+    public Booking setTblTask_UID(int tblTask_UID) {
         this.tblTask_UID = tblTask_UID;
+        
+        return this;
     }
     
     

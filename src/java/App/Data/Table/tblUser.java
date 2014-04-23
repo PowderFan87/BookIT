@@ -39,6 +39,22 @@ public class tblUser extends Base
         return objUser;
     }
     
+    public static User getUserByUsername(String strUsername) {
+        List<String[]>  lisFilter = new ArrayList<>();
+        
+        lisFilter.add(new String[]{"", "strUsername","=",strUsername});
+        
+        Map mapData = tblUser.fetchSingleEntry("TBLUSER", lisFilter);
+        
+        if(mapData == null) {
+            return null;
+        }
+        
+        User objUser = new User(mapData);
+        
+        return objUser;
+    }
+    
     public static List<User> getAll() {
         List<User>  lisUser = new ArrayList<>();
         List<Map>   lisRows = tblUser.getAll("TBLUSER");

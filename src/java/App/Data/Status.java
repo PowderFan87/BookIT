@@ -26,32 +26,40 @@ public class Status extends Base
         return UID;
     }
 
-    public void setUID(int UID) {
+    public Status setUID(int UID) {
         this.UID = UID;
+        
+        return this;
     }
 
     public String getStrName() {
         return strName;
     }
 
-    public void setStrName(String strName) {
+    public Status setStrName(String strName) {
         this.strName = strName;
+        
+        return this;
     }
 
     public String getTxtDescription() {
         return txtDescription;
     }
 
-    public void setTxtDescription(String txtDescription) {
+    public Status setTxtDescription(String txtDescription) {
         this.txtDescription = txtDescription;
+        
+        return this;
     }
 
     public Boolean isFlgDeleted() {
         return flgDeleted;
     }
 
-    public void setFlgDeleted(Boolean flgDeleted) {
+    public Status setFlgDeleted(Boolean flgDeleted) {
         this.flgDeleted = flgDeleted;
+        
+        return this;
     }
     
     
