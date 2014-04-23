@@ -3,3 +3,36 @@
     Author     : Holger Szuesz <hszuesz@live.com>
 */
 
+body {
+    background-color: #fff;
+}
+
+#loginbox {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    font-family: 'Fredericka the Great', cursive;
+    border: 2px solid #aaa;
+    padding: 50px;
+}
+
+#logo {
+    
+    font-size: 100px;
+    color: #000;
+    font-weight:  normal;
+    padding: 0px;
+    margin: 0px;
+}
+
+#luser {
+    margin-left: 50px;
+}
+
+#lpass {
+    margin-left: 100px;
+}
+
+#submit {
+    margin-left: 200px;
+}

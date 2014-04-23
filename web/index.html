@@ -4,24 +4,27 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width">
         
+        <link href='http://fonts.googleapis.com/css?family=Fredericka+the+Great' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="/BookIT/css/main.css" />
         <link rel="stylesheet" href="/BookIT/js/libs/jqueryui/css/base/jquery.ui.all.css" />
         
         <title>BookIT</title>
     </head>
     <body>
-        <h1>Good Morning</h1>
         
-        <br />
-        
-        <form action="/BookIT/p/Login" method="POST">
-            <input type="text" name="strUsername" id="strUsername" value="Username" /><br />
-            <input type="password" name="strPassword" id="strPassword" value="" /><br />
-            <input type="submit" value="Login" />
-        </form>
+        <div id="loginbox" class="ui-corner-all">
+            <h1 id="logo">BookIT</h1>
+
+            <form action="/BookIT/p/Login" method="POST">
+                <label id="luser" for="strUsername">User&nbsp;&nbsp;</label><input type="text" name="strUsername" id="strUsername" value="" class="text ui-widget-content ui-corner-all" /><br />
+                <label id="lpass" for="strPassword">Passwort&nbsp;&nbsp;</label><input type="password" name="strPassword" id="strPassword" value="" class="text ui-widget-content ui-corner-all" /><br />
+                <input id="submit" type="submit" value="Login" class="ui-button ui-widget ui-state-default ui-corner-all" />
+            </form>
+        </div>
         
         <script type="text/javascript" src="/BookIT/js/libs/jquery/jquery.js"></script>
         <script type="text/javascript" src="/BookIT/js/libs/jqueryui/jquery-ui.js"></script>
         <script type="text/javascript" src="/BookIT/js/libs/main.js"></script>
+        
     </body>
 </html>

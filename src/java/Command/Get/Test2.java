@@ -1,7 +1,6 @@
 package Command.Get;
 
 import Core.Command.Base;
-import Core.Web;
 
 /**
  *
@@ -11,12 +10,9 @@ public class Test2 extends Base
 {
     @Override
     public void runDefault() {
-        Web.objSession.setAttribute("lngUserid", 7);
+        this.objRequest.getSession().setAttribute("lngUserid", 7);
         
-        try {
-            Thread.sleep(2000);
-        } catch(InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }
+        this.objRequest.setAttribute("tplView", "Get/Test2.jsp");
+        this.objRequest.setAttribute("strTitle", "Test 2");
     }
 }

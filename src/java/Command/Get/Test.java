@@ -22,7 +22,7 @@ public class Test extends Base implements IRestricted
     
     @Override
     public void checkRestriction() throws RestrictionException {
-        if(!App.Security.isLoggedIn()) {
+        if(!App.Security.isLoggedIn(this.objRequest)) {
             throw new RestrictionException();
         }
     }

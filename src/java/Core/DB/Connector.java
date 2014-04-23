@@ -43,7 +43,7 @@ public class Connector
         this.objConnection.setAutoCommit(false);
     }
     
-    public List execute(String strSql) throws SQLException {
+    public List<Map> execute(String strSql) throws SQLException {
         ResultSet objResult;
         
         try(Statement objStatement = this.objConnection.createStatement()) {
@@ -52,7 +52,7 @@ public class Connector
             ResultSetMetaData   objMetaData     = objResult.getMetaData();
             int                 lngColumnCount  = objMetaData.getColumnCount();
             
-            List lisRows = new ArrayList();
+            List<Map> lisRows = new ArrayList<>();
             
             while(objResult.next()) {
                 Map<String, String> mapRow = new HashMap<>();

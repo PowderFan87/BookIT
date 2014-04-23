@@ -1,7 +1,6 @@
 package Command.Post;
 
 import Core.Command.Base;
-import Core.Web;
 
 /**
  *
@@ -9,7 +8,8 @@ import Core.Web;
  */
 public class Logout extends Base
 {
+    @Override
     public void runDefault() {
-        Web.objSession.invalidate();
+        this.objRequest.getSession().invalidate();
     }
 }
