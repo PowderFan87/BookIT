@@ -3,6 +3,7 @@ package App.Data;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,13 +25,13 @@ public class Project extends Base
     public Project(Map<String, String> mapData) {
         super();
         
-        SimpleDateFormat objDateParser = new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat objParser = new SimpleDateFormat("yyyy-MM-dd");
         
         this.UID            = Integer.parseInt(mapData.get("UID"));
         this.strName        = mapData.get("STRNAME");
         
         try {
-            this.dtmCreated = objDateParser.parse(mapData.get("DTMCREATED"));
+            this.dtmCreated = objParser.parse(mapData.get("DTMCREATED"));
         } catch (ParseException ex) {
             Logger.getLogger(Project.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -109,6 +110,26 @@ public class Project extends Base
         this.tblStatus_UID = tblStatus_UID;
         
         return this;
+    }
+
+    @Override
+    public Base doInsert() {
+        Map<String, String> mapData = new HashMap<>();
+        
+        SimpleDateFormat objParser = new SimpleDateFormat("yyyy-MM-dd");
+        
+        mapData.put("STRNAME", this.strName);
+        mapData.put("DTMDATE", objParser.format(this.dtmCreated));
+        mapData.put("TXTDESCRIPTION", this.txtDescription);
+        mapData.put("TBLUSER_UID", String.valueOf(this.tblUser_UID));
+        mapData.put("TBLSTATUS_UID", String.valueOf(this.tblStatus_UID));
+        
+        return this.doInsert("TBLPROJECT", mapData);
+    }
+
+    @Override
+    public Base doUpdate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

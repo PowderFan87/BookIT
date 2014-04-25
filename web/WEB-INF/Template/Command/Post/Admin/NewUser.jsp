@@ -4,9 +4,10 @@
     Author     : Holger Szuesz <hszuesz@live.com>
 --%>
 
+<%@page import="App.Tools.Util"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="myTags" tagdir="/WEB-INF/tags" %>
-<% if(((String[])request.getAttribute("errors")).length > 0) { %>
+<% if(!Util.isEmptyArray((String[])request.getAttribute("errors"))) { %>
     <jsp:include page="../../Get/Admin/NewUser.jsp" />
     
     <myTags:formerrors />

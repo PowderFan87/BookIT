@@ -2,13 +2,13 @@ package Command.Post;
 
 import App.Data.User;
 import App.Data.Userprofile;
+import App.Tools.Util;
 import App.Tools.Validator;
 import Core.Command.Base;
 import Core.Command.RestrictionException;
 import Interface.IRestricted;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -47,16 +47,28 @@ public class Admin extends Base implements IRestricted
     public void runNewUser() {
         String[] arrErrors = this.validateNewUser();
         
-        if(arrErrors.length == 0) {
+        if(Util.isEmptyArray(arrErrors)) {
             User        objUser     = new User();
             Userprofile objProfile  = new Userprofile();
             
             objUser
                 .setStrUsername((String)this.getParameter("strUsername"))
-                .setTblUsertype_UID((int)this.getParameter("lngUsertype"));
+                .setTblUsertype_UID(Integer.parseInt((String)this.getParameter("lngUsertype")))
+                .setStrPassword((String)this.getParameter("strPassword"))
+                .setTblUsertype_UID(Integer.parseInt((String)this.getParameter("lngUsertype")))
+                .setDtmActivated(new Date())
+                .doInsert();
             
             objProfile
-                .setStrEmail((String)this.getParameter("strEmail"));
+                .setStrEmail((String)this.getParameter("strEmail"))
+                .setTblUser_UID(objUser.getUID())
+                .doInsert();
+        } else {
+            System.out.println(arrErrors.length);
+            System.out.println(arrErrors[0]);
+            System.out.println(arrErrors[1]);
+            System.out.println(arrErrors[2]);
+            System.out.println(arrErrors[3]);
         }
         
         this.objRequest.setAttribute("errors", arrErrors);
@@ -66,7 +78,7 @@ public class Admin extends Base implements IRestricted
     }
     
     private String[] validateNewUser() {
-        String[] arrErrors = new String[3];
+        String[] arrErrors = new String[4];
         
         if(!Validator.isValidUsername((String)this.getParameter("strUsername"))) {
             arrErrors[0] = "strUsername";
@@ -74,6 +86,10 @@ public class Admin extends Base implements IRestricted
         
         if(!Validator.isValidEmail((String)this.getParameter("strEmail"))) {
             arrErrors[1] = "strEmail";
+        }
+        
+        if(!Validator.isValidPassword((String)this.getParameter("strPassword"))) {
+            arrErrors[2] = "strPassword";
         }
         
         if(arrErrors.length > 0) {

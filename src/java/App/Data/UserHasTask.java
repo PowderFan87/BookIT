@@ -1,6 +1,11 @@
 package App.Data;
 
+import Core.DB.Connector;
+import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,6 +29,18 @@ public class UserHasTask extends Base
         this.lngMinutesleft     = Integer.parseInt(mapData.get("LNGMINUTESLEFT"));
         this.lngBookingscount   = Integer.parseInt(mapData.get("LNGBOOKINGSCOUNT"));
         this.flgDeleted         = Boolean.parseBoolean(mapData.get("FLGDELETED"));
+    }
+
+    @Override
+    public int getUID() {
+        return 0;
+    }
+
+    @Override
+    public Base setUID(int lngUid) {
+        // nothing happens here
+        
+        return this;
     }
 
     public int getTblUser_UID() {
@@ -85,6 +102,29 @@ public class UserHasTask extends Base
         
         return this;
     }
-    
-    
+
+    @Override
+    public Base doInsert() {
+        String strSql = ""
+                + "INSERT INTO TBLUSER_HAS_TBLTASK "
+                + "(TBLUSER_UID, TBLTASK_UID, LNGGRANTEDMINUTES, LNGMINUTESLEFT, LNGBOOKINGSCOUNT) "
+                + "VALUES ("
+                + "" + String.valueOf(this.tblUser_UID) + ", "
+                + "" + String.valueOf(this.tblTask_UID) + ", "
+                + "" + String.valueOf(this.lngGrantedminutes) + ", "
+                + "" + String.valueOf(this.lngMinutesleft) + ", "
+                + "" + String.valueOf(this.lngBookingscount) + ")";
+        try {
+            Connector.getInstance().insert(strSql);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserHasTask.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return this;
+    }
+
+    @Override
+    public Base doUpdate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

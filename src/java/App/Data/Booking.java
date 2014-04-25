@@ -3,6 +3,7 @@ package App.Data;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,7 +25,7 @@ public class Booking extends Base
     public Booking(Map<String, String> mapData) {
         super();
         
-        SimpleDateFormat objParser = new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat objParser = new SimpleDateFormat("yyyy-MM-dd");
         
         this.UID            = Integer.parseInt(mapData.get("UID"));
         this.lngMinutes     = Integer.parseInt(mapData.get("LNGMINUTES"));
@@ -107,6 +108,26 @@ public class Booking extends Base
         this.tblTask_UID = tblTask_UID;
         
         return this;
+    }
+
+    @Override
+    public Base doInsert() {
+        Map<String, String> mapData = new HashMap<>();
+        
+        SimpleDateFormat objParser = new SimpleDateFormat("yyyy-MM-dd");
+
+        mapData.put("LNGMINUTES", String.valueOf(this.lngMinutes));
+        mapData.put("STRCOMMENT", this.strComment);
+        mapData.put("DTMDATE", objParser.format(this.dtmDate));
+        mapData.put("TBLTASK_UID", String.valueOf(this.tblTask_UID));
+        mapData.put("TBLUSER_UID", String.valueOf(this.tblUser_UID));
+        
+        return this.doInsert("TBLBOOKING", mapData);
+    }
+
+    @Override
+    public Base doUpdate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

@@ -40,7 +40,7 @@ public class Connector
         
         this.objConnection = DriverManager.getConnection("jdbc:derby://localhost:1527/bookitdb", "bookitdb", "800k17d8");
         
-        this.objConnection.setAutoCommit(false);
+        this.objConnection.setAutoCommit(true);
     }
     
     public List<Map> execute(String strSql) throws SQLException {
@@ -70,6 +70,7 @@ public class Connector
     
     public int insert(String strSql) throws SQLException {
         try(Statement objStatement = this.objConnection.createStatement()) {
+            System.out.println(strSql);
             return objStatement.executeUpdate(strSql);
         }
     }

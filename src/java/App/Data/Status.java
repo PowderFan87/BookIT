@@ -1,5 +1,6 @@
 package App.Data;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -60,6 +61,24 @@ public class Status extends Base
         this.flgDeleted = flgDeleted;
         
         return this;
+    }
+
+    @Override
+    public Base doInsert() {
+        Map<String, String> mapData = new HashMap<>();
+        
+        mapData.put("STRNAME", this.strName);
+        
+        if(this.txtDescription != null) {
+            mapData.put("TXTDESCRIPTION", this.txtDescription);
+        }
+        
+        return this.doInsert("TBLSTATUS", mapData);
+    }
+
+    @Override
+    public Base doUpdate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

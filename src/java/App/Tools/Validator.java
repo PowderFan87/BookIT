@@ -14,7 +14,7 @@ public class Validator
     public static boolean isValidUsername(String strUsername) {
         boolean blnIsValidUser = true;
         
-        if(strUsername.length() < 6) {
+        if(strUsername.length() < 4) {
             blnIsValidUser = false;
         }
         
@@ -38,5 +38,19 @@ public class Validator
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(strEmail);
         
         return matcher.find();
+    }
+    
+    public static boolean isValidPassword(String strPassword) {
+        boolean blnIsValidPassword = true;
+        
+        if(strPassword.length() < 6) {
+            blnIsValidPassword = false;
+        }
+        
+        if(strPassword.length() > 256) {
+            blnIsValidPassword = false;
+        }
+        
+        return blnIsValidPassword;
     }
 }

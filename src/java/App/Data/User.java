@@ -1,8 +1,11 @@
 package App.Data;
 
+import App.Data.Table.tblUser;
+import App.Security;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,7 +31,7 @@ public class User extends Base
     public User(Map<String, String> mapData) {
         super();
         
-        SimpleDateFormat objParser = new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat objParser = new SimpleDateFormat("yyyy-MM-dd");
         
         this.UID                = Integer.parseInt(mapData.get("UID"));
         this.strUsername        = mapData.get("STRUSERNAME");
@@ -43,10 +46,12 @@ public class User extends Base
         this.tblUsertype_UID    = Integer.parseInt(mapData.get("TBLUSERTYPE_UID"));
     }
     
+    @Override
     public int getUID() {
         return UID;
     }
 
+    @Override
     public User setUID(int UID) {
         this.UID = UID;
         
@@ -111,5 +116,27 @@ public class User extends Base
         this.tblUsertype_UID = tblUsertype_UID;
         
         return this;
+    }
+
+    @Override
+    public Base doInsert() {
+        Map<String, String> mapData = new HashMap<>();
+        
+        SimpleDateFormat objParser = new SimpleDateFormat("yyyy-MM-dd");
+        
+        System.out.println("" + this.dtmActivated.toLocaleString() + " | " + objParser.format(this.dtmActivated));
+        
+        mapData.put("STRUSERNAME", this.strUsername);
+        mapData.put("STRPASSWORD", Security.encodeString(tblUser.strSalt + this.strPassword));
+        mapData.put("BLNACTIVE", "true");
+        mapData.put("DTMACTIVATED", objParser.format(this.dtmActivated));
+        mapData.put("TBLUSERTYPE_UID", String.valueOf(this.tblUsertype_UID));
+        
+        return this.doInsert("TBLUSER", mapData);
+    }
+
+    @Override
+    public Base doUpdate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

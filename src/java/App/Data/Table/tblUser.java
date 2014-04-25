@@ -27,6 +27,7 @@ public class tblUser extends Base
         
         lisFilter.add(new String[]{"", "strUsername","=",strUsername});
         lisFilter.add(new String[]{"AND", "strPassword","=",Security.encodeString(tblUser.strSalt + strPassword)});
+        lisFilter.add(new String[]{"AND", "flgDeleted","=","false"});
         
         Map mapData = tblUser.fetchSingleEntry("TBLUSER", lisFilter);
         

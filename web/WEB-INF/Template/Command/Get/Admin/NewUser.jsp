@@ -19,6 +19,10 @@
             <td><input type="text" id="strEmail" name="strEmail" value="<c:out value="${requestScope['strEmail']}" />" class="text ui-widget-content ui-corner-all" /></td>
         </tr>
         <tr>
+            <th><label for="strPassword">Password:</label></th>
+            <td><input type="text" id="strPassword" name="strPassword" value="<c:out value="${requestScope['strPassword']}" />" class="text ui-widget-content ui-corner-all" /></td>
+        </tr>
+        <tr>
             <th><label for="lngUsertype">Usertype:</label></th>
             <td>
                 <select id="lngUsertype" name="lngUsertype" class="text ui-widget-content ui-corner-all">

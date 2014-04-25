@@ -1,5 +1,6 @@
 package App.Data;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -100,6 +101,34 @@ public class Userprofile extends Base
         this.tblUser_UID = tblUser_UID;
         
         return this;
+    }
+
+    @Override
+    public Base doInsert() {
+        Map<String, String> mapData = new HashMap<>();
+        
+        if(this.strSurname != null) {
+            mapData.put("STRSURNAME", this.strSurname);
+        }
+        
+        if(this.strName != null) {
+            mapData.put("STRNAME", this.strName);
+        }
+        
+        mapData.put("STREMAIL", this.strEmail);
+        
+        if(this.strCustomstartpage != null) {
+            mapData.put("STRCUSTOMSTARTPAGE", this.strCustomstartpage);
+        }
+        
+        mapData.put("TBLUSER_UID", String.valueOf(this.tblUser_UID));
+        
+        return this.doInsert("TBLUSERPROFILE", mapData);
+    }
+
+    @Override
+    public Base doUpdate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
