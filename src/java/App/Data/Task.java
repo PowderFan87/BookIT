@@ -25,6 +25,10 @@ public class Task extends Base
     private int     tblProject_UID;
     private int     tblUser_UID;
     
+    public Task() {
+        super();
+    }
+    
     public Task(Map<String, String> mapData) {
         super();
         

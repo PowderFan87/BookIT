@@ -1,5 +1,6 @@
 package Command.Post;
 
+import App.Data.Task;
 import App.Security;
 import App.Tools.Util;
 import App.Tools.Validator;
@@ -7,6 +8,8 @@ import Core.Command.Base;
 import Core.Command.RestrictionException;
 import Interface.IRestricted;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -64,6 +67,37 @@ public class Project extends Base implements IRestricted
         this.objRequest.setAttribute("strTitle", "NewProject");
     }
     
+    public void runNewTask() {
+        String[] arrErrors = this.validateNewTask();
+        
+        if(Util.isEmptyArray(arrErrors)) {
+            SimpleDateFormat    objParser   = new SimpleDateFormat("dd.MM.yyyy");
+            Task                objTask     = new Task();
+            
+            if(((String)this.getParameter("dtmDeadline")).length() == 10) {
+                try {
+                    objTask.setDtmDeadline(objParser.parse((String)this.getParameter("dtmDeadline")));
+                } catch (ParseException ex) {
+                    Logger.getLogger(Project.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            objTask
+                .setStrName((String)this.getParameter("strName"))
+                .setStrStatus((String)this.getParameter("strStatus"))
+                .setDtmCreated(new Date())
+                .setTxtDescription((String)this.getParameter("txtDescription"))
+                .setTblProject_UID(Integer.parseInt((String)this.getParameter("tblProject_UID")))
+                .setTblUser_UID((int)this.objRequest.getSession().getAttribute("lngUserid"))
+                .doInsert();
+        }
+        
+        this.objRequest.setAttribute("errors", arrErrors);
+        
+        this.objRequest.setAttribute("tplView", "Post/Project/NewTask.jsp");
+        this.objRequest.setAttribute("strTitle", "NewTask");
+    }
+    
     private String[] validateNewProject() {
         String[] arrErrors = new String[2];
         
@@ -74,6 +108,12 @@ public class Project extends Base implements IRestricted
         if(!Validator.hasLengthBetween((String)this.getParameter("txtDescription"), 10, 0)) {
             arrErrors[1] = "txtDescription";
         }
+        
+        return arrErrors;
+    }
+    
+    private String[] validateNewTask() {
+        String[] arrErrors = new String[5];
         
         return arrErrors;
     }
