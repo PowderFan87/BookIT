@@ -1,5 +1,7 @@
 package App.Tools;
 
+import App.Data.Project;
+import App.Data.Table.tblProject;
 import App.Data.Table.tblUser;
 import App.Data.User;
 import java.util.regex.Matcher;
@@ -52,5 +54,37 @@ public class Validator
         }
         
         return blnIsValidPassword;
+    }
+    
+    public static boolean isValidProjectname(String strName) {
+        boolean blnIsValidProjectname = true;
+        
+        if(strName.length() < 6) {
+            blnIsValidProjectname = false;
+        }
+        
+        if(strName.length() > 256) {
+            blnIsValidProjectname = false;
+        }
+        
+        if(tblProject.getProjectByName(strName) instanceof Project) {
+            blnIsValidProjectname = false;
+        }
+        
+        return blnIsValidProjectname;
+    }
+    
+    public static boolean hasLengthBetween(String strText, int lngMin, int lngMax) {
+        boolean blnHasLengthBetween = true;
+        
+        if(lngMin > 0 && strText.length() < lngMin) {
+            blnHasLengthBetween = false;
+        }
+        
+        if(lngMax > 0 && strText.length() > lngMax) {
+            blnHasLengthBetween = false;
+        }
+        
+        return blnHasLengthBetween;
     }
 }

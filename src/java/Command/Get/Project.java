@@ -1,7 +1,6 @@
 package Command.Get;
 
-import App.Data.Table.tblUser;
-import App.Data.User;
+import App.Data.Table.tblProject;
 import App.Security;
 import Core.Command.Base;
 import Core.Command.RestrictionException;
@@ -16,16 +15,18 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author Holger Szuesz <hszuesz@live.com>
  */
-public class Admin extends Base implements IRestricted
+public class Project extends Base implements IRestricted
 {
+
     @Override
     public void runDefault() {
-        List<User> lisUser = tblUser.getAll();
+        List<App.Data.Project> lisProject = tblProject.getProjectByUserUID((int)this.objRequest.getSession().getAttribute("lngUserid"));
         
-        this.objRequest.setAttribute("lisUser", lisUser);
+        this.objRequest.setAttribute("lisProject", lisProject);
         
-        this.objRequest.setAttribute("tplView", "Get/Admin.jsp");
-        this.objRequest.setAttribute("strTitle", "Admin");
+        
+        this.objRequest.setAttribute("tplView", "Get/Project.jsp");
+        this.objRequest.setAttribute("strTitle", "Project");
     }
 
     @Override
@@ -34,7 +35,7 @@ public class Admin extends Base implements IRestricted
             throw new RestrictionException();
         }
         
-        if(!Security.isAdmin(objRequest)) {
+        if(!Security.isManager(objRequest)) {
             throw new RestrictionException();
         }
     }
@@ -44,12 +45,13 @@ public class Admin extends Base implements IRestricted
         try {
             this.objResponse.sendRedirect("/BookIT");
         } catch (IOException ex) {
-            Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Project.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public void runNewUser() {
-        this.objRequest.setAttribute("tplView", "Get/Admin/NewUser.jsp");
-        this.objRequest.setAttribute("strTitle", "NewUser");
+    public void runNewProject() {
+        this.objRequest.setAttribute("tplView", "Get/Project/NewProject.jsp");
+        this.objRequest.setAttribute("strTitle", "NewProject");
     }
+    
 }

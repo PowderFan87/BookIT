@@ -63,12 +63,6 @@ public class Admin extends Base implements IRestricted
                 .setStrEmail((String)this.getParameter("strEmail"))
                 .setTblUser_UID(objUser.getUID())
                 .doInsert();
-        } else {
-            System.out.println(arrErrors.length);
-            System.out.println(arrErrors[0]);
-            System.out.println(arrErrors[1]);
-            System.out.println(arrErrors[2]);
-            System.out.println(arrErrors[3]);
         }
         
         this.objRequest.setAttribute("errors", arrErrors);

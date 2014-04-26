@@ -28,7 +28,7 @@ public class Security
         return ((int)objRequest.getSession().getAttribute("lngUsertype") == 0);
     }
     
-    public static boolean canAccess(String strArea, HttpServletRequest objRequest) {
+    public static boolean isManager(HttpServletRequest objRequest) {
         return true;
     }
     

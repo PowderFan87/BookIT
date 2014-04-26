@@ -13,7 +13,7 @@
 <a href="/BookIT/g/Admin">Administration</a>
 <% } %>
 
-<% if(App.Security.canAccess("Project", request)) { %>
+<% if(App.Security.isManager(request)) { %>
 <a href="/BookIT/g/Project">Projects</a>
 <% } %>
 

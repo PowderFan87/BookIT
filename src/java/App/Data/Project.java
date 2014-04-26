@@ -22,6 +22,10 @@ public class Project extends Base
     private int     tblUser_UID;
     private int     tblStatus_UID;
     
+    public Project() {
+        super();
+    }
+    
     public Project(Map<String, String> mapData) {
         super();
         
