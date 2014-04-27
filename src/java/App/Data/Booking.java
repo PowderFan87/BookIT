@@ -79,6 +79,12 @@ public class Booking extends Base
         
         return this;
     }
+    
+    public String getStrDate() {
+        SimpleDateFormat objParser = new SimpleDateFormat("dd.MM.yyyy");
+        
+        return objParser.format(this.dtmDate);
+    }
 
     public Boolean isFlgDeleted() {
         return flgDeleted;

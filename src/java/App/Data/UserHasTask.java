@@ -1,8 +1,10 @@
 package App.Data;
 
+import App.Data.Table.tblBooking;
 import App.Data.Table.tblUser;
 import Core.DB.Connector;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -118,6 +120,22 @@ public class UserHasTask extends Base
         }
         
         return this.objUser.getStrDisplayname();
+    }
+    
+    public String getStrUsername() {
+        if(!(this.objUser instanceof User)) {
+            this.objUser = tblUser.getUserByUID(this.tblUser_UID);
+        }
+        
+        return this.objUser.getStrUsername();
+    }
+    
+    public int getLngAvgBookedMinutes() {
+        return (this.getLngMinutesworked() / this.lngBookingscount);
+    }
+    
+    public List<Booking> getLisBookings() {
+        return tblBooking.getBookingsByUserUIDAndTaskUID(this.tblUser_UID, this.tblTask_UID);
     }
 
     @Override
