@@ -12,14 +12,12 @@
     <table>
         <tr>
             <th><label for="strName">Name:</label></th>
-            <td><input type="text" id="strName" name="strName" value="<c:out value="${requestScope['strName']}" />" class="text ui-widget-content ui-corner-all" /></td>
+            <td><input type="text" id="strName" name="strName" value="${param.strName}" class="text ui-widget-content ui-corner-all" /></td>
         </tr>
         <tr>
             <th><label for="txtDescription">Description:</label></th>
             <td>
-                <textarea id="txtDescription" name="txtDescription" class="text ui-widget-content ui-corner-all">
-                    <c:out value="${requestScope['txtDescription']}" />
-                </textarea>
+                <textarea id="txtDescription" name="txtDescription" class="text ui-widget-content ui-corner-all">${param.txtDescription}</textarea>
             </td>
         </tr>
         <tr>

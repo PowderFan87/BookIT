@@ -131,6 +131,10 @@ public class UserHasTask extends Base
     }
     
     public int getLngAvgBookedMinutes() {
+        if(this.lngBookingscount == 0) {
+            return 0;
+        }
+        
         return (this.getLngMinutesworked() / this.lngBookingscount);
     }
     

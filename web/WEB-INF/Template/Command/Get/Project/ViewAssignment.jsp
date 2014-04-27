@@ -6,7 +6,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<h2>Assignment (T#<jsp:getProperty name="UserHasTask" property="tblTask_UID" />, <jsp:getProperty name="UserHasTask" property="strUsername" /></h2>
+<h2>Assignment (T#<jsp:getProperty name="UserHasTask" property="tblTask_UID" />, <jsp:getProperty name="UserHasTask" property="strUsername" />)</h2>
 
 <h4>Details</h4>
 

@@ -3,6 +3,8 @@ package Core;
 import Core.Command.Factory;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,40 +28,110 @@ public class Web extends HttpServlet
     protected void processRequest(HttpServletRequest objRequest, HttpServletResponse objResponse) throws ServletException, IOException {
         objResponse.setContentType("text/html;charset=UTF-8");
         
-        try (PrintWriter out = objResponse.getWriter()) {
-            Core.Command.Base objCommand = Factory.getCommand(objRequest);
+        Core.Command.Base objCommand = Factory.getCommand(objRequest);
+
+        objCommand.run(objRequest, objResponse);
+
+        if(!objResponse.isCommitted()) {
+            objRequest.getRequestDispatcher("/WEB-INF/Template/index.jsp").forward(objRequest, objResponse);
+        }
+    }
+    
+    protected void processAjaxRequest(HttpServletRequest objRequest, HttpServletResponse objResponse) throws ServletException, IOException {
+        objResponse.setContentType("application/json;charset=UTF-8");
+
+        Core.Command.Base objCommand = Factory.getCommand(objRequest);
+
+        objCommand.run(objRequest, objResponse);
+        
+        try(PrintWriter out = objResponse.getWriter()) {
+            out.println("{");
             
-            objCommand.run(objRequest, objResponse);
+            Map<String, Object> mapData = (Map<String, Object>)objRequest.getAttribute("mapData");
             
-            if(!objResponse.isCommitted()) {
-                objRequest.getRequestDispatcher("/WEB-INF/Template/index.jsp").forward(objRequest, objResponse);
+            int lngSize = mapData.size();
+            for(String strKey: mapData.keySet()) {
+                out.print(this.convertMapEntryToJSONString(strKey, mapData.get(strKey)));
+                
+                if(--lngSize != 0) {
+                    out.println(",");
+                } else {
+                    out.println();
+                }
             }
             
-//            System.out.println(App.Security.encodeString("800k17_54l7meinpw"));
-            
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet Post</title>");            
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet Post at " + objRequest.getContextPath() + "</h1>");
-//            out.println("<pre>");
-//            out.println(objRequest.getRequestURI().substring(1));
-//            out.println(objCommand.getstrAction());
-//            out.println(objRequest.getMethod());
-//            out.println(objRequest.getHeader("X-Requested-With"));
-//            out.println(this.getServletInfo());
-//            out.println(Web.objSession.getAttribute("lngUserid"));
-//            out.println("Object-ID: " + this.hashCode());
-//            out.println("Request-ID: " + objRequest.hashCode());
-//            out.println("Response-ID: " + objResponse.hashCode());
-//            out.println("</pre>");
-//            out.println("<form action=\"/BookIT/p/Logout\" method=\"POST\">");
-//            out.println("<input type=\"submit\" value=\"Logout\" />");
-//            out.println("</form>");
-//            out.println("</body>");
-//            out.println("</html>");
+            out.println("}");
         }
+    }
+    
+    private String convertMapEntryToJSONString(String strName, Object mixData) {
+        String  strJson = "\"" + strName + "\" : ";
+        int     lngSize;
+        
+        switch((mixData.getClass()).getSimpleName()) {
+            case "Float":
+            case "Double":
+            case "Integer":
+                strJson += String.valueOf(mixData);
+                
+                break;
+            
+            case "String":
+                strJson += "\"" + mixData + "\"";
+                
+                break;
+                
+            case "String[]":
+            case "Integer[]":
+            case "Double[]":
+            case "HashMap[]":
+                strJson += "[";
+                
+                lngSize = ((Object[])mixData).length;
+                for(Object mixEntry: (Object[])mixData) {
+                    if(mixEntry instanceof String) {
+                        strJson += "\"" + mixEntry + "\"";
+                    } else if(mixEntry instanceof HashMap) {
+                        strJson += "{";
+                        
+                        int lngSubsize = ((Map<String, Object>)mixEntry).size();
+                        for(String strKey: ((Map<String, Object>)mixEntry).keySet()) {
+                            strJson += this.convertMapEntryToJSONString(strKey, ((Map<String, Object>)mixEntry).get(strKey));
+
+                            if(--lngSubsize != 0) {
+                                strJson += ",";
+                            }
+                        }
+                        
+                        strJson += "}";
+                    } else {
+                        strJson += String.valueOf(mixEntry);
+                    }
+                    
+                    if(--lngSize != 0) {
+                        strJson += ",";
+                    }
+                }
+                
+                strJson += "]";
+                
+                break;
+                
+            case "HashMap":
+                strJson += "{";
+                
+                lngSize = ((Map<String, Object>)mixData).size();
+                for(String strKey: ((Map<String, Object>)mixData).keySet()) {
+                    strJson += this.convertMapEntryToJSONString(strKey, ((Map<String, Object>)mixData).get(strKey));
+                    
+                    if(--lngSize != 0) {
+                        strJson += ",";
+                    }
+                }
+                
+                strJson += "}";
+        }
+        
+        return strJson;
     }
 }

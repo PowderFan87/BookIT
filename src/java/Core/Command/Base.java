@@ -24,7 +24,6 @@ public abstract class Base
     public abstract void runDefault();
     
     public void run(HttpServletRequest objRequest, HttpServletResponse objResponse) {
-        Method objMethod    = null;
         this.objRequest     = objRequest;
         this.objResponse    = objResponse;
         
@@ -33,7 +32,7 @@ public abstract class Base
         System.out.println(this.strAction);
         
         try {
-            objMethod = this.getClass().getMethod("run" + this.strAction);
+            Method objMethod = this.getClass().getMethod("run" + this.strAction);
             
             objMethod.invoke(this);
         } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
@@ -51,12 +50,6 @@ public abstract class Base
     
     public Object getParameter(String strName) {
         return this.mapParams.get(strName)[0];
-    }
-    
-    protected void paramToAttribute() {
-        for(String strKey: this.mapParams.keySet()) {
-            this.objRequest.setAttribute(strKey, this.getParameter(strKey));
-        }
     }
     
     private void doSanitize() {

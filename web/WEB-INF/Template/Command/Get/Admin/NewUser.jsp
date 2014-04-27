@@ -4,7 +4,6 @@
     Author     : Holger Szuesz <hszuesz@live.com>
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <h2>New User</h2>
 
@@ -12,15 +11,15 @@
     <table>
         <tr>
             <th><label for="strUsername">Username:</label></th>
-            <td><input type="text" id="strUsername" name="strUsername" value="<c:out value="${requestScope['strUsername']}" />" class="text ui-widget-content ui-corner-all" /></td>
+            <td><input type="text" id="strUsername" name="strUsername" value="${param.strUsername}" class="text ui-widget-content ui-corner-all" /></td>
         </tr>
         <tr>
             <th><label for="strEmail">E-Mail:</label></th>
-            <td><input type="text" id="strEmail" name="strEmail" value="<c:out value="${requestScope['strEmail']}" />" class="text ui-widget-content ui-corner-all" /></td>
+            <td><input type="text" id="strEmail" name="strEmail" value="${param.strEmail}" class="text ui-widget-content ui-corner-all" /></td>
         </tr>
         <tr>
             <th><label for="strPassword">Password:</label></th>
-            <td><input type="text" id="strPassword" name="strPassword" value="<c:out value="${requestScope['strPassword']}" />" class="text ui-widget-content ui-corner-all" /></td>
+            <td><input type="text" id="strPassword" name="strPassword" value="${param.strPassword}" class="text ui-widget-content ui-corner-all" /></td>
         </tr>
         <tr>
             <th><label for="lngUsertype">Usertype:</label></th>
@@ -32,6 +31,11 @@
                     <option value="2">Developer</option>
                     <option value="3">Designer</option>
                 </select>
+                <script type="text/javascript">
+                    $(document).ready(function(){
+                        ($("#lngUsertype option[value='${param.lngUsertype}']").length === 1)?$("#lngUsertype option[value='${param.lngUsertype}']").attr('selected', 'selected'):null;
+                    });
+                </script>
             </td>
         </tr>
         <tr>

@@ -129,10 +129,6 @@ public class Project extends Base implements IRestricted
             arrErrors[1] = "txtDescription";
         }
         
-        if(arrErrors.length > 0) {
-            this.paramToAttribute();
-        }
-        
         return arrErrors;
     }
     
@@ -159,10 +155,6 @@ public class Project extends Base implements IRestricted
             arrErrors[2] = "dtmDeadline";
         }
         
-        if(!Util.isEmptyArray(arrErrors)) {
-            this.paramToAttribute();
-        }
-        
         return arrErrors;
     }
     
@@ -175,10 +167,6 @@ public class Project extends Base implements IRestricted
         
         if(!Validator.isBetween(Integer.parseInt((String)this.getParameter("lngGrantedminutes")), 5, 0)) {
             arrErrors[1] = "lngGrantedminutes";
-        }
-        
-        if(arrErrors.length > 0) {
-            this.paramToAttribute();
         }
         
         return arrErrors;

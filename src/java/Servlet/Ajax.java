@@ -22,7 +22,7 @@ public class Ajax extends Web
      */
     @Override
     protected void doPost(HttpServletRequest objRequest, HttpServletResponse objResponse) throws ServletException, IOException {
-        this.processRequest(objRequest, objResponse);
+        this.processAjaxRequest(objRequest, objResponse);
     }
 
     /**

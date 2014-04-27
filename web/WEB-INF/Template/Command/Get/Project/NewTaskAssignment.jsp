@@ -9,7 +9,7 @@
 <h2>New task assignment</h2>
 
 <form action="/BookIT/p/Project/NewTaskAssignment" method="POST">
-    <input type="hidden" id="tblTask_UID" name="tblTask_UID" value="<c:out value="${requestScope['tblTask_UID']}" />" />
+    <input type="hidden" id="tblTask_UID" name="tblTask_UID" value="${param.tblTask_UID}" />
     <table>
         <tr>
             <th><label for="tblUser_UID">User: </label></th>
@@ -20,11 +20,16 @@
                     <option value="<c:out value="${User.UID}" />"><c:out value="${User.strUsername}" /></option>
                 </c:forEach>
                 </select>
+                <script type="text/javascript">
+                    $(document).ready(function(){
+                        ($("#tblUser_UID option[value='${param.tblUser_UID}']").length === 1)?$("#tblUser_UID option[value='${param.tblUser_UID}']").attr('selected', 'selected'):null;
+                    });
+                </script>
             </td>
         </tr>
         <tr>
             <th><label for="lngGrantedminutes">Cap (in minutes)</label></th>
-            <td><input type="number" id="lngGrantedminutes" name="lngGrantedminutes" value="<c:out value="${0 + requestScope['lngGrantedminutes']}" />" step="5" class="text ui-widget-content ui-corner-all" /></td>
+            <td><input type="number" id="lngGrantedminutes" name="lngGrantedminutes" value="${0 + param.lngGrantedminutes}" step="5" class="text ui-widget-content ui-corner-all" /></td>
         </tr>
         <tr>
             <th>&nbsp;</th>

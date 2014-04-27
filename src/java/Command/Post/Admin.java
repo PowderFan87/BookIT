@@ -86,10 +86,6 @@ public class Admin extends Base implements IRestricted
             arrErrors[2] = "strPassword";
         }
         
-        if(!Util.isEmptyArray(arrErrors)) {
-            this.paramToAttribute();
-        }
-        
         return arrErrors;
     }
 }
