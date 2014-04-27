@@ -1,6 +1,9 @@
 package Command.Get;
 
 import App.Data.Table.tblProject;
+import App.Data.Table.tblTask;
+import App.Data.Table.tblUser;
+import App.Data.Task;
 import App.Security;
 import Core.Command.Base;
 import Core.Command.RestrictionException;
@@ -68,5 +71,22 @@ public class Project extends Base implements IRestricted
         
         this.objRequest.setAttribute("tplView", "Get/Project/NewTask.jsp");
         this.objRequest.setAttribute("strTitle", "NewTask");
+    }
+    
+    public void runViewTask() {
+        Task objTask = tblTask.getTaskByUID(Integer.parseInt((String)this.getParameter("UID")));
+        
+        this.objRequest.setAttribute("Task", objTask);
+        
+        this.objRequest.setAttribute("tplView", "Get/Project/ViewTask.jsp");
+        this.objRequest.setAttribute("strTitle", "T#" + objTask.getUID() + " " + objTask.getStrName());
+    }
+    
+    public void runNewTaskAssignment() {
+        this.objRequest.setAttribute("tblTask_UID", (String)this.getParameter("tblTask_UID"));
+        this.objRequest.setAttribute("lisUser", tblUser.getAll());
+        
+        this.objRequest.setAttribute("tplView", "Get/Project/NewTaskAssignment.jsp");
+        this.objRequest.setAttribute("strTitle", "New Assignment");
     }
 }

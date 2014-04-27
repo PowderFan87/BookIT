@@ -1,8 +1,8 @@
 package App.Data;
 
+import App.Data.Table.tblUser;
 import Core.DB.Connector;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +19,11 @@ public class UserHasTask extends Base
     private int     lngMinutesleft;
     private int     lngBookingscount;
     private Boolean flgDeleted;
+    private User    objUser;
+    
+    public UserHasTask() {
+        super();
+    }
     
     public UserHasTask(Map<String, String> mapData) {
         super();
@@ -101,6 +106,18 @@ public class UserHasTask extends Base
         this.flgDeleted = flgDeleted;
         
         return this;
+    }
+    
+    public int getLngMinutesworked() {
+        return this.lngGrantedminutes - this.lngMinutesleft;
+    }
+    
+    public String getStrDisplayname() {
+        if(!(this.objUser instanceof User)) {
+            this.objUser = tblUser.getUserByUID(this.tblUser_UID);
+        }
+        
+        return this.objUser.getStrDisplayname();
     }
 
     @Override

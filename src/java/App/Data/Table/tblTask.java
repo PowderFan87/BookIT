@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class tblTask extends Base
 {
-    public static Task getUserByUID(int lngUID) {
+    public static Task getTaskByUID(int lngUID) {
         Map mapData = tblTask.getByPK("TBLTASK", lngUID);
         
         Task objTask = new Task(mapData);

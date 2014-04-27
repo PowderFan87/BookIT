@@ -1,6 +1,7 @@
 package Command.Post;
 
 import App.Data.Task;
+import App.Data.UserHasTask;
 import App.Security;
 import App.Tools.Util;
 import App.Tools.Validator;
@@ -71,7 +72,7 @@ public class Project extends Base implements IRestricted
         String[] arrErrors = this.validateNewTask();
         
         if(Util.isEmptyArray(arrErrors)) {
-            SimpleDateFormat    objParser   = new SimpleDateFormat("dd.MM.yyyy");
+            SimpleDateFormat    objParser   = new SimpleDateFormat("yyyy-MM-dd");
             Task                objTask     = new Task();
             
             if(((String)this.getParameter("dtmDeadline")).length() == 10) {
@@ -84,7 +85,7 @@ public class Project extends Base implements IRestricted
             
             objTask
                 .setStrName((String)this.getParameter("strName"))
-                .setStrStatus((String)this.getParameter("strStatus"))
+                .setStrStatus("open")
                 .setDtmCreated(new Date())
                 .setTxtDescription((String)this.getParameter("txtDescription"))
                 .setTblProject_UID(Integer.parseInt((String)this.getParameter("tblProject_UID")))
@@ -98,6 +99,25 @@ public class Project extends Base implements IRestricted
         this.objRequest.setAttribute("strTitle", "NewTask");
     }
     
+    public void runNewTaskAssignment() {
+        String[] arrErrors = this.validateNewTaskAssignment();
+        
+        if(Util.isEmptyArray(arrErrors)) {
+            UserHasTask objAssignment = new UserHasTask();
+            
+            objAssignment
+                .setTblTask_UID(Integer.parseInt((String)this.getParameter("tblTask_UID")))
+                .setTblUser_UID(Integer.parseInt((String)this.getParameter("tblUser_UID")))
+                .setLngGrantedminutes(Integer.parseInt((String)this.getParameter("lngGrantedminutes")))
+                .doInsert();
+        }
+        
+        this.objRequest.setAttribute("errors", arrErrors);
+        
+        this.objRequest.setAttribute("tplView", "Post/Project/NewTaskAssignment.jsp");
+        this.objRequest.setAttribute("strTitle", "New Assignment");
+    }
+    
     private String[] validateNewProject() {
         String[] arrErrors = new String[2];
         
@@ -109,11 +129,31 @@ public class Project extends Base implements IRestricted
             arrErrors[1] = "txtDescription";
         }
         
+        if(arrErrors.length > 0) {
+            this.paramToAttribute();
+        }
+        
         return arrErrors;
     }
     
     private String[] validateNewTask() {
         String[] arrErrors = new String[5];
+        
+        
+        if(arrErrors.length > 0) {
+            this.paramToAttribute();
+        }
+        
+        return arrErrors;
+    }
+    
+    private String[] validateNewTaskAssignment() {
+        String[] arrErrors = new String[2];
+        
+        
+        if(arrErrors.length > 0) {
+            this.paramToAttribute();
+        }
         
         return arrErrors;
     }

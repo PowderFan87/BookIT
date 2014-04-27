@@ -1,6 +1,7 @@
 package App.Data;
 
 import App.Data.Table.tblUser;
+import App.Data.Table.tblUser_Has_tblTask;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -163,6 +164,10 @@ public class Task extends Base
     public List<User> getLisAssignedUser() {
         return tblUser.getUserAssignedToTask(this.UID);
     }
+    
+    public List<UserHasTask> getLisAssignments() {
+        return tblUser_Has_tblTask.getAssignmentsByTaskUID(this.UID);
+    }
 
     @Override
     public Base doInsert() {
@@ -176,7 +181,7 @@ public class Task extends Base
         
         mapData.put("STRNAME", this.strName);
         mapData.put("TXTDESCRIPTION", this.txtDescription);
-        mapData.put("DTMCREATION", objParser.format(this.dtmCreated));
+        mapData.put("DTMCREATED", objParser.format(this.dtmCreated));
         
         if(this.dtmDeadline != null) {
             mapData.put("DTMDEADLINE", objParser.format(this.dtmDeadline));

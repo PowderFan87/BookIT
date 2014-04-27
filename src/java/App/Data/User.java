@@ -1,6 +1,7 @@
 package App.Data;
 
 import App.Data.Table.tblUser;
+import App.Data.Table.tblUserprofile;
 import App.Security;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,13 +17,14 @@ import java.util.logging.Logger;
  */
 public class User extends Base
 {
-    private int     UID;
-    private String  strUsername;
-    private String  strPassword;
-    private boolean blnActive;
-    private Date    dtmActivated;
-    private boolean flgDeleted;
-    private int     tblUsertype_UID;
+    private int         UID;
+    private String      strUsername;
+    private String      strPassword;
+    private boolean     blnActive;
+    private Date        dtmActivated;
+    private boolean     flgDeleted;
+    private int         tblUsertype_UID;
+    private Userprofile objProfile;
     
     public User() {
         super();
@@ -119,7 +121,11 @@ public class User extends Base
     }
     
     public String getStrDisplayname() {
-        return this.strUsername + "<eigentlich.mail@profile.de>";
+        if(!(this.objProfile instanceof Userprofile)) {
+            this.objProfile = tblUserprofile.getProfileByUserUID(this.UID);
+        }
+        
+        return this.strUsername + " <" + this.objProfile.getStrEmail() + ">";
     }
 
     @Override

@@ -9,7 +9,7 @@
 <h2>New Task</h2>
 
 <form action="/BookIT/p/Project/NewTask" method="POST">
-    <input type="hidden" id="tblProject_UID" name="tblProject_uid" value="<c:out value="${requestScope['tblProject_UID']}" />" />
+    <input type="hidden" id="tblProject_UID" name="tblProject_UID" value="<c:out value="${requestScope['tblProject_UID']}" />" />
     
     <table>
         <tr>
@@ -26,7 +26,7 @@
         </tr>
         <tr>
             <td><label for="dtmDeadline">Deadline:</label></td>
-            <td><intput type="date" id="dtmDeadline" name="dtmDeadline" value="<c:out value="${requestScope['dtmDeadline']}" />" /></td>
+            <td><input type="date" id="dtmDeadline" name="dtmDeadline" value="<c:out value="${requestScope['dtmDeadline']}" />" class="text ui-widget-content ui-corner-all" /></td>
         </tr>
         <tr>
             <td>&nbsp;</td>
