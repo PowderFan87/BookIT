@@ -1,9 +1,11 @@
 package App.Data;
 
+import App.Data.Table.tblUser;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,7 +37,7 @@ public class Task extends Base
         SimpleDateFormat objParser = new SimpleDateFormat("yyyy-MM-dd");
         
         this.UID            = Integer.parseInt(mapData.get("UID"));
-        this.lngParent      = Integer.parseInt(mapData.get("LNGPARENT"));
+//        this.lngParent      = Integer.parseInt(mapData.get("LNGPARENT"));
         this.strName        = mapData.get("STRNAME");
         this.txtDescription = mapData.get("TXTDESCRIPTION");
         
@@ -111,6 +113,12 @@ public class Task extends Base
         
         return this;
     }
+    
+    public String getStrDeadline() {
+        SimpleDateFormat objParser = new SimpleDateFormat("dd.MM.yyyy");
+        
+        return objParser.format(this.dtmDeadline);
+    }
 
     public String getStrStatus() {
         return strStatus;
@@ -150,6 +158,10 @@ public class Task extends Base
         this.tblUser_UID = tblUser_UID;
         
         return this;
+    }
+    
+    public List<User> getLisAssignedUser() {
+        return tblUser.getUserAssignedToTask(this.UID);
     }
 
     @Override

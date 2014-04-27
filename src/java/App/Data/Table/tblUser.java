@@ -56,6 +56,25 @@ public class tblUser extends Base
         return objUser;
     }
     
+    public static List<User> getUserAssignedToTask(int tblTask_UID) {
+        List<User>      lisUsers    = new ArrayList<>();
+        List<String[]>  lisFilter   = new ArrayList<>();
+        
+        lisFilter.add(new String[]{"","TBLUSER_HAS_TBLTASK.tblTask_UID","=",String.valueOf(tblTask_UID)});
+        lisFilter.add(new String[]{" AND","TBLUSER_HAS_TBLTASK.flgDeleted","=","false"});
+        lisFilter.add(new String[]{" AND","TBLUSER.flgDeleted","=","false"});
+        
+        List<Map> lisRows = tblProject.fetchAll("TBLUSER JOIN TBLUSER_HAS_TBLTASK ON (TBLUSER_HAS_TBLTASK.TBLUSER_UID = TBLUSER.UID)", lisFilter);
+        
+        if(lisRows != null && !lisRows.isEmpty()) {
+            for(Map<String, String> mapData:lisRows) {
+                lisUsers.add(new User(mapData));
+            }
+        }
+        
+        return lisUsers;
+    }
+    
     public static List<User> getAll() {
         List<User>  lisUser = new ArrayList<>();
         List<Map>   lisRows = tblUser.getAll("TBLUSER");

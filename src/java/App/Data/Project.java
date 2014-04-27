@@ -1,9 +1,11 @@
 package App.Data;
 
+import App.Data.Table.tblTask;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -114,6 +116,14 @@ public class Project extends Base
         this.tblStatus_UID = tblStatus_UID;
         
         return this;
+    }
+    
+    public String getStrStatus() {
+        return "dummy";
+    }
+    
+    public List<Task> getLisTasks() {
+        return tblTask.getTaskByProjectUID(this.UID);
     }
 
     @Override

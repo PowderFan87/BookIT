@@ -117,6 +117,10 @@ public class User extends Base
         
         return this;
     }
+    
+    public String getStrDisplayname() {
+        return this.strUsername + "<eigentlich.mail@profile.de>";
+    }
 
     @Override
     public Base doInsert() {

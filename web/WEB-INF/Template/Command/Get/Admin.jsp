@@ -22,7 +22,7 @@
             <th>Username</th>
             <th>Password</th>
             <th style="text-align: right;">
-                <button form="admin" formaction="/BookIT/g/Admin/NewUser" formmethod="GET">New</button>
+                <button class="btnnew" form="admin" formaction="/BookIT/g/Admin/NewUser" formmethod="GET">New</button>
             </th>
         </tr>
     </thead>
@@ -33,9 +33,9 @@
             <td><c:out value="${User.strUsername}" /></td>
             <td><c:out value="${User.strPassword}" /></td>
             <td>
-                <button form="admin" formaction="/BookIT/g/Admin/ViewUser" formmethod="GET" name="UID" value="<c:out value="${User.UID}" />">View</button>
-                <button form="admin" formaction="/BookIT/p/Admin/EditUser" formmethod="POST" name="UID" value="<c:out value="${User.UID}" />">Edit</button>
-                <button form="admin" formaction="/BookIT/p/Admin/DeleteUser" formmethod="POST" name="UID" value="<c:out value="${User.UID}" />">Delete</button>
+                <button class="btnview" form="admin" formaction="/BookIT/g/Admin/ViewUser" formmethod="GET" name="UID" value="<c:out value="${User.UID}" />">View</button>
+                <button class="btnedit" form="admin" formaction="/BookIT/p/Admin/EditUser" formmethod="POST" name="UID" value="<c:out value="${User.UID}" />">Edit</button>
+                <button class="btndelete" form="admin" formaction="/BookIT/p/Admin/DeleteUser" formmethod="POST" name="UID" value="<c:out value="${User.UID}" />">Delete</button>
             </td>
         </tr>
     </c:forEach>

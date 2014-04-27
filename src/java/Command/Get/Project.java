@@ -54,6 +54,15 @@ public class Project extends Base implements IRestricted
         this.objRequest.setAttribute("strTitle", "NewProject");
     }
     
+    public void runViewProject() {
+        App.Data.Project objProject = tblProject.getProjectByUID(Integer.parseInt((String)this.getParameter("UID")));
+        
+        this.objRequest.setAttribute("Project", objProject);
+        
+        this.objRequest.setAttribute("tplView", "Get/Project/ViewProject.jsp");
+        this.objRequest.setAttribute("strTitle", "P#" + objProject.getUID() + " " + objProject.getStrName());
+    }
+    
     public void runNewTask() {
         this.objRequest.setAttribute("tblProject_UID", (String)this.getParameter("id"));
         

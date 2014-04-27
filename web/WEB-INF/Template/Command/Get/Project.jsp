@@ -22,7 +22,7 @@
             <th>Description</th>
             <th>Status</th>
             <th style="text-align: right;">
-                <button form="project" formaction="/BookIT/g/Project/NewProject" formmethod="GET">New</button>
+                <button class="btnnew" form="project" formaction="/BookIT/g/Project/NewProject" formmethod="GET">New</button>
             </th>
         </tr>
     </thead>
@@ -34,9 +34,9 @@
             <td><c:out value="${Project.txtDescription}" /></td>
             <td><c:out value="${Project.strStatus}" /></td>
             <td>
-                <button form="project" formaction="/BookIT/g/Project/ViewProject" formmethod="GET" name="UID" value="<c:out value="${Project.UID}" />">View</button>
-                <button form="project" formaction="/BookIT/p/Project/EditProject" formmethod="POST" name="UID" value="<c:out value="${Project.UID}" />">Edit</button>
-                <button form="project" formaction="/BookIT/p/Project/DeleteProject" formmethod="POST" name="UID" value="<c:out value="${Project.UID}" />">Delete</button>
+                <button class="btnview" form="project" formaction="/BookIT/g/Project/ViewProject" formmethod="GET" name="UID" value="<c:out value="${Project.UID}" />">View</button>
+                <button class="btnedit" form="project" formaction="/BookIT/p/Project/EditProject" formmethod="POST" name="UID" value="<c:out value="${Project.UID}" />">Edit</button>
+                <button class="btndelete" form="project" formaction="/BookIT/p/Project/DeleteProject" formmethod="POST" name="UID" value="<c:out value="${Project.UID}" />">Delete</button>
             </td>
         </tr>
     </c:forEach>
