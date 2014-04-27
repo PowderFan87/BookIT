@@ -3,7 +3,10 @@ package App.Tools;
 import App.Data.Project;
 import App.Data.Table.tblProject;
 import App.Data.Table.tblUser;
+import App.Data.Table.tblUser_Has_tblTask;
 import App.Data.User;
+import App.Data.UserHasTask;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,6 +16,16 @@ import java.util.regex.Pattern;
  */
 public class Validator
 {
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile(
+            "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
+            Pattern.CASE_INSENSITIVE
+    );
+    
+    public static final Pattern VALID_DATE_REGEX = Pattern.compile(
+            "^[0-9]{4}-(0[0-9]{1}|1[0-2]{1})-([0-2]{1}[0-9]{1}|30|31)",
+            Pattern.CASE_INSENSITIVE
+    );
+    
     public static boolean isValidUsername(String strUsername) {
         boolean blnIsValidUser = true;
         
@@ -31,10 +44,17 @@ public class Validator
         return blnIsValidUser;
     }
     
-    public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile(
-            "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
-            Pattern.CASE_INSENSITIVE
-    );
+    public static boolean isValidDate(String strDate) {
+        Matcher matcher = VALID_DATE_REGEX.matcher(strDate);
+        
+        return matcher.find();
+    }
+    
+    public static boolean isFutureDate(Date dtmDate) {
+        Date dtmCurrentDate = new Date();
+        
+        return dtmDate.after(dtmCurrentDate);
+    }
     
     public static boolean isValidEmail(String strEmail) {
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(strEmail);
@@ -72,6 +92,24 @@ public class Validator
         }
         
         return blnIsValidProjectname;
+    }
+    
+    public static boolean isValidAssignment(int tblUser_UID, int tblTask_UID) {
+        return !(tblUser_Has_tblTask.getAssignmentByUserUIDAndTaskUID(tblUser_UID, tblTask_UID) instanceof UserHasTask);
+    }
+    
+    public static boolean isBetween(int lngValue, int lngMin, int lngMax) {
+        boolean blnIsBetween = true;
+        
+        if(lngMin > 0 && lngValue < lngMin) {
+            blnIsBetween = false;
+        }
+        
+        if(lngMax > 0 && lngValue > lngMax) {
+            blnIsBetween = false;
+        }
+        
+        return blnIsBetween;
     }
     
     public static boolean hasLengthBetween(String strText, int lngMin, int lngMax) {

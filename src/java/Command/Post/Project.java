@@ -137,10 +137,29 @@ public class Project extends Base implements IRestricted
     }
     
     private String[] validateNewTask() {
-        String[] arrErrors = new String[5];
+        String[] arrErrors = new String[3];
         
+        if(!Validator.hasLengthBetween((String)this.getParameter("strName"), 6, 256)) {
+            arrErrors[0] = "strName";
+        }
         
-        if(arrErrors.length > 0) {
+        if(!Validator.hasLengthBetween((String)this.getParameter("txtDescription"), 10, 0)) {
+            arrErrors[1] = "txtDescription";
+        }
+        
+        SimpleDateFormat objParser = new SimpleDateFormat("yyyy-MM-dd");
+
+        try {
+            if(!Validator.isValidDate((String)this.getParameter("dtmDeadline")) || !Validator.isFutureDate(objParser.parse((String)this.getParameter("dtmDeadline")))) {
+                arrErrors[2] = "dtmDeadline";
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(Project.class.getName()).log(Level.SEVERE, null, ex);
+            
+            arrErrors[2] = "dtmDeadline";
+        }
+        
+        if(!Util.isEmptyArray(arrErrors)) {
             this.paramToAttribute();
         }
         
@@ -150,6 +169,13 @@ public class Project extends Base implements IRestricted
     private String[] validateNewTaskAssignment() {
         String[] arrErrors = new String[2];
         
+        if(!Validator.isValidAssignment(Integer.parseInt((String)this.getParameter("tblUser_UID")), Integer.parseInt((String)this.getParameter("tblTask_UID")))) {
+            arrErrors[0] = "tblUser_UID";
+        }
+        
+        if(!Validator.isBetween(Integer.parseInt((String)this.getParameter("lngGrantedminutes")), 5, 0)) {
+            arrErrors[1] = "lngGrantedminutes";
+        }
         
         if(arrErrors.length > 0) {
             this.paramToAttribute();
