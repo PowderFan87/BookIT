@@ -68,6 +68,10 @@ public class Connector
         }
     }
     
+    public int update(String strSql) throws SQLException {
+        return this.insert(strSql);
+    }
+    
     public int insert(String strSql) throws SQLException {
         try(Statement objStatement = this.objConnection.createStatement()) {
             System.out.println(strSql);

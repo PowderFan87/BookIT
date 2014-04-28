@@ -24,10 +24,17 @@ public abstract class Base
         String  strSql = "";
         
         try {
-            Map<String, String> mapUID = (Map)Connector.getInstance().execute("SELECT UID FROM " + strTable + " ORDER BY UID DESC FETCH FIRST 1 ROWS ONLY").get(0);
+            int UID;
             
-            int UID = Integer.parseInt(mapUID.get("UID"));
+            try {
+                Map<String, String> mapUID = (Map)Connector.getInstance().execute("SELECT UID FROM " + strTable + " ORDER BY UID DESC FETCH FIRST 1 ROWS ONLY").get(0);
             
+                UID = Integer.parseInt(mapUID.get("UID"));
+            } catch (IndexOutOfBoundsException ex) {
+                //No entry yet in DB so we set UID to -1 (increment to 0 follows)
+                UID = -1;
+            }
+                
             UID++;
             
             this.setUID(UID);

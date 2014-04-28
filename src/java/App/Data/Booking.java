@@ -22,6 +22,10 @@ public class Booking extends Base
     private int     tblUser_UID;
     private int     tblTask_UID;
     
+    public Booking() {
+        super();
+    }
+    
     public Booking(Map<String, String> mapData) {
         super();
         
@@ -29,7 +33,7 @@ public class Booking extends Base
         
         this.UID            = Integer.parseInt(mapData.get("UID"));
         this.lngMinutes     = Integer.parseInt(mapData.get("LNGMINUTES"));
-        this.strComment     = mapData.get("strComment");
+        this.strComment     = mapData.get("STRCOMMENT");
         try {
             this.dtmDate    = objParser.parse(mapData.get("DTMDATE"));
         } catch (ParseException ex) {

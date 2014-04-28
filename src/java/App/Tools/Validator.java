@@ -56,6 +56,12 @@ public class Validator
         return dtmDate.after(dtmCurrentDate);
     }
     
+    public static boolean isPastOrCurrentDate(Date dtmDate) {
+        Date dtmCurrentDate = new Date();
+        
+        return dtmDate.compareTo(dtmCurrentDate) <= 0;
+    }
+    
     public static boolean isValidEmail(String strEmail) {
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(strEmail);
         
@@ -124,5 +130,15 @@ public class Validator
         }
         
         return blnHasLengthBetween;
+    }
+    
+    public static boolean canBookOnTask(int tblUser_UID, int tblTask_UID) {
+        return tblUser_Has_tblTask.getAssignmentByUserUIDAndTaskUID(tblUser_UID, tblTask_UID) instanceof UserHasTask;
+    }
+    
+    public static boolean hasEnoughMinutesLeft(int tblUser_UID, int tblTask_UID, int lngMinutes) {
+        UserHasTask objAssignment = tblUser_Has_tblTask.getAssignmentByUserUIDAndTaskUID(tblUser_UID, tblTask_UID);
+        
+        return lngMinutes <= objAssignment.getLngMinutesleft();
     }
 }

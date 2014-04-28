@@ -35,6 +35,36 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: normal;
 }
 
+table {
+    border-collapse: collapse;
+    empty-cells: show;
+}
+
+thead th {
+    padding: 5px 10px 5px 5px;
+    border-bottom: 1px solid #aaa;
+    border-right: 1px solid #aaa;
+}
+
+tbody td {
+    border-right: 1px solid #aaa;
+}
+
+td, th {
+    vertical-align: top;
+    padding: 5px 10px 5px 5px;
+    margin: 0px;
+}
+
+td:last-child, th:last-child {
+    padding-right: 0px;
+    border-right: 0px;
+}
+
+td:last-child {
+    border-bottom: 0px;
+}
+
 th {
     text-align: left;
 }
@@ -67,4 +97,16 @@ th {
 
 #submit {
     margin-left: 200px;
+}
+
+.cols2-left {
+    width: 47.5%;
+    float: left;
+    margin-right: 2.5%;
+}
+
+.cols2-right {
+    width: 47.5%;
+    float: left;
+    margin-left: 2.5%;
 }

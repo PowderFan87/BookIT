@@ -109,6 +109,7 @@ public class Project extends Base implements IRestricted
                 .setTblTask_UID(Integer.parseInt((String)this.getParameter("tblTask_UID")))
                 .setTblUser_UID(Integer.parseInt((String)this.getParameter("tblUser_UID")))
                 .setLngGrantedminutes(Integer.parseInt((String)this.getParameter("lngGrantedminutes")))
+                .setLngMinutesleft(Integer.parseInt((String)this.getParameter("lngGrantedminutes")))
                 .doInsert();
         }
         

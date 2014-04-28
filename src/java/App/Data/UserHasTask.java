@@ -1,6 +1,7 @@
 package App.Data;
 
 import App.Data.Table.tblBooking;
+import App.Data.Table.tblTask;
 import App.Data.Table.tblUser;
 import Core.DB.Connector;
 import java.sql.SQLException;
@@ -141,6 +142,10 @@ public class UserHasTask extends Base
     public List<Booking> getLisBookings() {
         return tblBooking.getBookingsByUserUIDAndTaskUID(this.tblUser_UID, this.tblTask_UID);
     }
+    
+    public Task getTask() {
+        return tblTask.getTaskByUID(this.tblTask_UID);
+    }
 
     @Override
     public Base doInsert() {
@@ -164,6 +169,22 @@ public class UserHasTask extends Base
 
     @Override
     public Base doUpdate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String strSql = ""
+                + "UPDATE TBLUSER_HAS_TBLTASK SET "
+                + "LNGGRANTEDMINUTES = " + String.valueOf(this.lngGrantedminutes) + ", "
+                + "LNGMINUTESLEFT = " + String.valueOf(this.lngMinutesleft) + ", "
+                + "LNGBOOKINGSCOUNT = " + String.valueOf(this.lngBookingscount) + " "
+                + "WHERE "
+                + "TBLUSER_UID = " + String.valueOf(this.tblUser_UID) + " "
+                + "AND "
+                + "TBLTASK_UID = " + String.valueOf(this.tblTask_UID);
+        
+        try {
+            Connector.getInstance().update(strSql);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserHasTask.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return this;
     }
 }
