@@ -127,7 +127,7 @@ public class User extends Base
         
         return this.strUsername + " <" + this.objProfile.getStrEmail() + ">";
     }
-
+    
     @Override
     public Base doInsert() {
         Map<String, String> mapData = new HashMap<>();

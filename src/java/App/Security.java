@@ -1,5 +1,7 @@
 package App;
 
+import App.Data.Table.tblUsertype;
+import App.Data.Usertype;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -29,7 +31,9 @@ public class Security
     }
     
     public static boolean isManager(HttpServletRequest objRequest) {
-        return true;
+        Usertype objType = tblUsertype.getUserByUID((int)objRequest.getSession().getAttribute("lngUsertype"));
+        
+        return objType.isFlgCanManage();
     }
     
     public static String encodeString(String strText) {
