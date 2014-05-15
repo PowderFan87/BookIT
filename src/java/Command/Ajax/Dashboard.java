@@ -1,7 +1,6 @@
 package Command.Ajax;
 
 import App.Data.Booking;
-import App.Data.Table.tblTask;
 import App.Data.Table.tblUser_Has_tblTask;
 import App.Data.Task;
 import App.Data.UserHasTask;

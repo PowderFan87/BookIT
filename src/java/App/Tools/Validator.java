@@ -141,4 +141,12 @@ public class Validator
         
         return lngMinutes <= objAssignment.getLngMinutesleft();
     }
+    
+    public static boolean isValidStartPage(String strCustomstartpage) {
+        boolean blnIsValidStartPage = true;
+        
+        
+        
+        return blnIsValidStartPage;
+    }
 }

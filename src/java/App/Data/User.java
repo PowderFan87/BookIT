@@ -128,6 +128,14 @@ public class User extends Base
         return this.strUsername + " <" + this.objProfile.getStrEmail() + ">";
     }
     
+    public Userprofile getProfile() {
+        if(!(this.objProfile instanceof Userprofile)) {
+            this.objProfile = tblUserprofile.getProfileByUserUID(this.UID);
+        }
+        
+        return this.objProfile;
+    }
+    
     @Override
     public Base doInsert() {
         Map<String, String> mapData = new HashMap<>();
